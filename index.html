@@ -318,20 +318,10 @@ playerTab.addEventListener('click',()=>{
 // play/pause — use user gesture properly for mobile
 playBtn.addEventListener('click',()=>{
   if(!playing){
-    const p=audio.play();
-    if(p!==undefined){
-      p.then(()=>{
-        playBtn.textContent='⏸';
-        playing=true;
-      }).catch(()=>{
-        // retry once on mobile
-        audio.load();
-        audio.play().then(()=>{
-          playBtn.textContent='⏸';
-          playing=true;
-        });
-      });
-    }
+    audio.load();
+    audio.play();
+    playBtn.textContent='⏸';
+    playing=true;
   } else {
     audio.pause();
     playBtn.textContent='▶';
