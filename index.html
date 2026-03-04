@@ -4,6 +4,21 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>С 8 Марта!</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>"/>
+<script>
+  const titles=[
+    'С 8 Марта! 🌸',
+    'С 8 Марта! 🌺',
+    'С 8 Марта! 🌹',
+    'С 8 Марта! 🌷',
+    'С 8 Марта! 💐',
+    'С 8 Марта! 🌼',
+    'С 8 Марта! 🪷',
+    'С 8 Марта! 💖',
+  ];
+  let ti=0;
+  setInterval(()=>{ document.title=titles[ti++%titles.length]; },500);
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;600&family=Great+Vibes&display=swap');
 
@@ -276,16 +291,58 @@ if(window.matchMedia('(pointer:fine)').matches){
   });
 }
 
-// CONFETTI BAR
-document.getElementById('confettiBar').addEventListener('click',()=>{
-  const emojis=['🌸','🌺','🌹','🌷','💐','🌼','🎀','💖','✨','🎉','🥂','🌻','🪷','💮'];
-  for(let i=0;i<40;i++){
+// FIREWORK FOUNTAIN
+document.getElementById('confettiBar').addEventListener('click', function(){
+  const rect = this.getBoundingClientRect();
+  const originX = rect.left + rect.width/2;
+  const originY = rect.top + 10;
+  const emojis=['🌹','💐','🌸','🌺','🌷','🌼','🪷','💖'];
+  const count = 28;
+  const particles = [];
+
+  for(let i=0;i<count;i++){
     const el=document.createElement('div');
     el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-    el.style.cssText=`position:fixed;z-index:9999;pointer-events:none;font-size:${1.2+Math.random()*1.4}rem;left:${Math.random()*100}vw;top:${Math.random()*40+10}vh;animation:trailFade ${.8+Math.random()*1.2}s ease forwards;`;
+    const angle = -90 + (Math.random()-0.5)*100;
+    const rad = angle*Math.PI/180;
+    const speed = 80+Math.random()*160;
+    const size = 0.9+Math.random()*1.1;
+    el.style.cssText=`position:fixed;z-index:9999;pointer-events:none;font-size:${size}rem;left:${originX}px;top:${originY}px;will-change:transform,opacity;`;
     document.body.appendChild(el);
-    setTimeout(()=>el.remove(),2000);
+    particles.push({
+      el, x:originX, y:originY,
+      vx: Math.cos(rad)*speed,
+      vy: Math.sin(rad)*speed,
+      rot:Math.random()*360,
+      rotSpeed:(Math.random()-0.5)*4,
+      life:0, maxLife:1.4+Math.random()*.6
+    });
   }
+
+  let last=null;
+  const gravity=400;
+  function loop(ts){
+    if(!last) last=ts;
+    const dt=Math.min((ts-last)/1000, 0.05);
+    last=ts;
+    let alive=0;
+    for(const p of particles){
+      p.life+=dt;
+      if(p.life>p.maxLife){ p.el.remove(); continue; }
+      alive++;
+      p.vy+=gravity*dt;
+      p.x+=p.vx*dt;
+      p.y+=p.vy*dt;
+      p.rot+=p.rotSpeed;
+      const progress=p.life/p.maxLife;
+      const opacity=progress<0.7?1:1-(progress-0.7)/0.3;
+      const scale=1-progress*0.3;
+      p.el.style.transform=`translate(${p.x-originX}px,${p.y-originY}px) rotate(${p.rot}deg) scale(${scale})`;
+      p.el.style.opacity=opacity;
+    }
+    if(alive>0) requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
 });
 
 // SAKURA
