@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>С 8 Марта!</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --rose:#ff6b9d;
+  --rose-light:#ffb3d1;
+  --pink:#f472b6;
+  --pink-soft:#fce7f3;
+  --lavender:#c084fc;
+  --lavender-light:#e9d5ff;
+  --peach:#fb923c;
+  --peach-light:#fed7aa;
+  --coral:#f43f5e;
+  --gold:#f59e0b;
+  --mint:#34d399;
+  --text:#6b1e3f;
+  --muted:#b06090;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Lato',sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+  background:#fff0f6;
+}
+
+/* ── PETALS ── */
+.petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.petal{
+  position:absolute;top:-60px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg) scale(1);opacity:.9;}
+  100%{transform:translateY(115vh) rotate(540deg) scale(.6);opacity:0;}
+}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:4rem 2rem;position:relative;z-index:1;
+  background:linear-gradient(135deg,#ffe4f0 0%,#ffd6eb 25%,#f3d0ff 50%,#ffd6eb 75%,#ffe4f0 100%);
+  background-size:400% 400%;
+  animation:gradShift 8s ease infinite;
+}
+@keyframes gradShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+
+.hero-flowers{
+  display:flex;gap:.5rem;font-size:2.2rem;margin-bottom:1.2rem;
+  animation:fadeUp .7s ease both;
+}
+.hero-flowers span{display:inline-block;animation:sway 3s ease-in-out infinite;}
+.hero-flowers span:nth-child(2){animation-delay:.3s;}
+.hero-flowers span:nth-child(3){animation-delay:.6s;}
+.hero-flowers span:nth-child(4){animation-delay:.9s;}
+.hero-flowers span:nth-child(5){animation-delay:1.2s;}
+@keyframes sway{0%,100%{transform:rotate(-8deg);}50%{transform:rotate(8deg);}}
+
+#hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,9vw,6rem);
+  background:linear-gradient(135deg,var(--coral),var(--rose),var(--lavender),var(--pink));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1.1;margin-bottom:.5rem;
+  animation:fadeUp .8s ease .1s both;
+}
+.hero-date{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.3rem;
+  background:linear-gradient(90deg,var(--lavender),var(--rose));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:1.2rem;
+  animation:fadeUp .8s ease .2s both;
+}
+.hero-tagline{
+  font-size:1.05rem;color:var(--muted);max-width:500px;line-height:1.9;
+  animation:fadeUp .8s ease .35s both;
+}
+.scroll-hint{margin-top:2.5rem;color:var(--muted);font-size:.85rem;animation:fadeUp .8s ease .5s both;}
+.scroll-hint span{display:block;font-size:1.6rem;animation:bounce 1.4s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* ── BANNER ── */
+.banner{
+  position:relative;z-index:1;
+  background:linear-gradient(90deg,var(--coral),var(--rose),var(--lavender),var(--pink),var(--peach),var(--rose));
+  background-size:300% 100%;
+  animation:gradShift 5s ease infinite;
+  padding:.9rem 2rem;
+  text-align:center;
+  color:#fff;font-size:1rem;letter-spacing:.05em;font-weight:700;
+  overflow:hidden;
+}
+.banner-inner{
+  display:inline-block;
+  white-space:nowrap;
+  animation:marquee 18s linear infinite;
+}
+@keyframes marquee{0%{transform:translateX(60vw);}100%{transform:translateX(-100%);}}
+
+/* ── SECTIONS ── */
+.section{padding:5rem 2rem;position:relative;z-index:1;}
+.container{max-width:960px;margin:0 auto;}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  text-align:center;margin-bottom:.4rem;
+  background:linear-gradient(135deg,var(--coral),var(--lavender));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.section-sub{text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:.95rem;}
+.flower-divider{text-align:center;font-size:1.6rem;margin-bottom:2.5rem;letter-spacing:.4rem;}
+
+/* ── WISHES ── */
+#wishes{background:linear-gradient(180deg,#fff5f9 0%,#f5e6ff 50%,#fff0f6 100%);}
+.wishes-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
+  gap:1.4rem;
+}
+.wish-card{
+  background:#fff;
+  border-radius:22px;
+  padding:1.7rem 1.4rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 24px rgba(244,114,182,.1);
+  transition:transform .3s,box-shadow .3s;
+}
+.wish-card:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(192,132,252,.25);}
+
+/* each card gets a unique gradient top bar */
+.wish-card:nth-child(1)::before{background:linear-gradient(90deg,#f43f5e,#fb923c);}
+.wish-card:nth-child(2)::before{background:linear-gradient(90deg,#c084fc,#f472b6);}
+.wish-card:nth-child(3)::before{background:linear-gradient(90deg,#f59e0b,#f43f5e);}
+.wish-card:nth-child(4)::before{background:linear-gradient(90deg,#f472b6,#c084fc);}
+.wish-card:nth-child(5)::before{background:linear-gradient(90deg,#fb923c,#f472b6);}
+.wish-card:nth-child(6)::before{background:linear-gradient(90deg,#34d399,#f472b6);}
+.wish-card:nth-child(7)::before{background:linear-gradient(90deg,#c084fc,#f43f5e);}
+.wish-card:nth-child(8)::before{background:linear-gradient(90deg,#f59e0b,#c084fc);}
+.wish-card:nth-child(9)::before{background:linear-gradient(90deg,#f43f5e,#f472b6);}
+.wish-card:nth-child(10)::before{background:linear-gradient(90deg,#fb923c,#c084fc);}
+.wish-card:nth-child(11)::before{background:linear-gradient(90deg,#f472b6,#f43f5e);}
+.wish-card:nth-child(12)::before{background:linear-gradient(90deg,#c084fc,#34d399);}
+.wish-card:nth-child(13)::before{background:linear-gradient(90deg,#f43f5e,#c084fc);}
+.wish-card:nth-child(14)::before{background:linear-gradient(90deg,#f472b6,#f59e0b);}
+.wish-card:nth-child(15)::before{background:linear-gradient(90deg,#fb923c,#f43f5e);}
+.wish-card:nth-child(16)::before{background:linear-gradient(90deg,#c084fc,#fb923c);}
+.wish-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
+
+.wish-card::after{
+  content:'';position:absolute;bottom:-40px;right:-20px;
+  width:100px;height:100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(244,114,182,.08),transparent);
+}
+.wish-emoji{font-size:2.2rem;margin-bottom:.7rem;display:block;}
+.wish-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;margin-bottom:.5rem;
+  background:linear-gradient(135deg,var(--coral),var(--lavender));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.wish-text{font-size:.87rem;color:var(--muted);line-height:1.75;}
+
+/* ── QUOTE ── */
+#quote{
+  background:linear-gradient(135deg,#ffe4f0,#f3d0ff,#ffd6eb);
+  background-size:300% 300%;animation:gradShift 6s ease infinite;
+  padding:5rem 2rem;text-align:center;
+}
+.quote-box{
+  max-width:640px;margin:0 auto;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(12px);
+  border-radius:28px;padding:3rem 2.5rem;
+  box-shadow:0 8px 48px rgba(244,114,182,.18);
+  border:1px solid rgba(244,114,182,.3);
+}
+.quote-flowers{font-size:2rem;margin-bottom:1rem;letter-spacing:.3rem;}
+.quote-text{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.2rem;color:var(--text);line-height:1.9;margin-bottom:1.2rem;
+}
+.quote-from{
+  font-size:.85rem;
+  background:linear-gradient(90deg,var(--rose),var(--lavender));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-weight:700;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:linear-gradient(90deg,#ffe4f0,#f3d0ff,#ffe4f0);
+  border-top:2px solid #fbb6ce;
+  text-align:center;padding:2rem;
+  color:var(--muted);font-size:.85rem;
+  position:relative;z-index:1;
+}
+footer .footer-flowers{font-size:1.4rem;margin-bottom:.5rem;letter-spacing:.3rem;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-flowers">
+    <span>🌸</span><span>🌺</span><span>🌹</span><span>🌷</span><span>🌼</span>
+  </div>
+  <h1>С 8 Марта!</h1>
+  <div class="hero-date">Международный женский день</div>
+  <p class="hero-tagline">Этот день — для вас, наши дорогие девочки из РС25.<br>Вы делаете каждый учебный день теплее и ярче 💕</p>
+  <div class="scroll-hint"><span>↓</span>листай вниз</div>
+</section>
+
+<!-- MARQUEE BANNER -->
+<div class="banner">
+  <div class="banner-inner">
+    🌸 С праздником, девочки РС25! &nbsp;🌺 Международные отношения &nbsp;💐 8 Марта &nbsp;🌹 Вы лучшие! &nbsp;🌷 С праздником весны! &nbsp;✨ РС25 навсегда &nbsp;🌸
+  </div>
+</div>
+
+<!-- WISHES -->
+<section id="wishes" class="section">
+  <div class="container">
+    <h2 class="section-title">С праздником наших потужных из РС25</h2>
+    <p class="section-sub">Каждой из вас — особенное пожелание от всего сердца 🌷</p>
+    <div class="flower-divider">🌸 🌺 🌹 🌷 🌼 🌻</div>
+    <div class="wishes-grid">
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌸</span>
+        <div class="wish-name">София</div>
+        <div class="wish-text">Твоя мудрость и спокойствие — настоящий подарок для всей группы. Пусть жизнь будет такой же гармоничной, как ты сама!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">💜</span>
+        <div class="wish-name">Юлианна</div>
+        <div class="wish-text">Яркая, неповторимая, особенная — именно такая ты и есть. Пусть этот день подарит тебе только улыбки и цветы!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌼</span>
+        <div class="wish-name">Марья</div>
+        <div class="wish-text">Пусть весна принесёт тебе столько радости, сколько ты даришь окружающим. Ты настоящее солнышко нашей группы!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌹</span>
+        <div class="wish-name">Мария</div>
+        <div class="wish-text">Твоя доброта и открытость согревают всех вокруг. Желаем тебе всего самого светлого в этот весенний день!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">💐</span>
+        <div class="wish-name">Ирина</div>
+        <div class="wish-text">Сильная, уверенная, прекрасная — всё это про тебя! Пусть этот праздник станет началом чего-то замечательного.</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌷</span>
+        <div class="wish-name">Ульяна</div>
+        <div class="wish-text">Лёгкости тебе, вдохновения и весеннего настроения каждый день! Ты украшаешь нашу группу своим присутствием.</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">✨</span>
+        <div class="wish-name">Серафима</div>
+        <div class="wish-text">Твоё имя звучит как музыка, и ты сама такая же — особенная и неповторимая. С праздником, пусть всё сбывается!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">👑</span>
+        <div class="wish-name">Виктория</div>
+        <div class="wish-text">Победа — в твоём имени, и победительница — в твоём характере. Пусть удача всегда будет на твоей стороне!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌻</span>
+        <div class="wish-name">Оля</div>
+        <div class="wish-text">Тёплая, искренняя, настоящая — именно такой ты и остаёшься. Желаем тебе радости и весеннего тепла!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌺</span>
+        <div class="wish-name">Маргарита</div>
+        <div class="wish-text">Как цветок маргаритки — нежная и стойкая одновременно. Пусть жизнь цветёт и радует тебя каждый день!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🕊️</span>
+        <div class="wish-name">Анна</div>
+        <div class="wish-text">Твоя грация и изящество вдохновляют. Пусть этот день принесёт тебе только самые приятные сюрпризы!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">💫</span>
+        <div class="wish-name">Диана</div>
+        <div class="wish-text">Яркая как звезда, свободная как ветер — такой и оставайся! Желаем тебе самого лучшего в этот весенний праздник.</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌸</span>
+        <div class="wish-name">Елизавета</div>
+        <div class="wish-text">Царственная и утончённая — ты настоящее украшение нашей группы. Пусть жизнь дарит тебе только королевские моменты!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🌷</span>
+        <div class="wish-name">Юлия</div>
+        <div class="wish-text">Солнечная, энергичная и неповторимая! Пусть этот день будет таким же ярким и тёплым, как ты сама.</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">💖</span>
+        <div class="wish-name">Алина</div>
+        <div class="wish-text">Добрая, отзывчивая, искренняя — всё это ты. Желаем тебе весны в душе круглый год!</div>
+      </div>
+
+      <div class="wish-card">
+        <span class="wish-emoji">🔮</span>
+        <div class="wish-name">Кира</div>
+        <div class="wish-text">Загадочная и умная — ты всегда знаешь чего хочешь. Пусть все твои мечты обязательно сбудутся!</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <div class="quote-box">
+    <div class="quote-flowers">🌸 🌺 🌹 🌷 🌼</div>
+    <div class="quote-text">«Женщина — это целый мир: нежный, сильный, бесконечно красивый. Сегодня весь мир принадлежит вам.»</div>
+    <div class="quote-from">💐 С любовью, ваши одногруппники · РС25 · МО</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-flowers">🌸 🌺 🌹 🌷 🌼 🌻 💐</div>
+  С 8 Марта, дорогие девочки из РС25! 🌸<br>
+  <span style="font-size:.8rem;opacity:.7">Международные отношения · 2025</span>
+</footer>
+
+<script>
+  const emojis=['🌸','🌺','🌹','🌷','🌼','🌻','💐','✿','❀','🪷'];
+  const colors=['#f43f5e','#f472b6','#c084fc','#fb923c','#f59e0b','#34d399'];
+  const container=document.getElementById('petals');
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.cssText=`
+      left:${Math.random()*100}vw;
+      font-size:${.8+Math.random()*1.6}rem;
+      animation-duration:${7+Math.random()*12}s;
+      animation-delay:${Math.random()*12}s;
+      filter:drop-shadow(0 0 4px ${colors[Math.floor(Math.random()*colors.length)]}44);
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
