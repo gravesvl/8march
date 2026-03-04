@@ -22,8 +22,8 @@ body{font-family:'Nunito',sans-serif;color:var(--text);overflow-x:hidden;backgro
 @keyframes trailFade{0%{opacity:1;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-120%) scale(.3);}}
 
 /* SAKURA BG */
-.sakura-bg{position:fixed;inset:0;z-index:0;background:url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1600&q=80') center/cover no-repeat;filter:blur(6px) brightness(.85) saturate(1.2);transform:scale(1.05);}
-.sakura-bg-overlay{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,rgba(255,220,235,.55),rgba(230,200,255,.45),rgba(255,210,230,.5));}
+.sakura-bg{position:fixed;inset:0;z-index:0;background:url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1600&q=80') center/cover no-repeat;filter:blur(6px) brightness(.7) saturate(.9);transform:scale(1.05);}
+.sakura-bg-overlay{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,rgba(255,220,235,.45),rgba(230,200,255,.38),rgba(255,210,230,.42));}
 .sakura-wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .sakura{position:absolute;top:-60px;animation:sakuraFall linear infinite;}
 @keyframes sakuraFall{
@@ -186,17 +186,15 @@ footer .footer-flowers{font-size:1.4rem;margin-bottom:.5rem;letter-spacing:.3rem
   С 8 Марта, дорогие девочки из РС25! 🌸<br>
   <span style="font-size:.8rem;opacity:.7">Международные отношения · 2025</span>
 </footer>
-<div class="watermark">© graves inc.</div>
+<div class="watermark" style="background:#1a1a1a;text-align:center;padding:.8rem;font-size:1rem;color:#888;letter-spacing:.3em;position:relative;z-index:2;font-family:'Nunito',sans-serif;">© graves inc.</div>
 
 <!-- MUSIC PLAYER -->
 <div class="player" id="playerBox">
   <button class="play-btn" id="playBtn" onclick="togglePlayer()">▶</button>
-  <div>
-    <div style="font-size:.75rem;font-weight:700;color:#6b1e3f;">🎵 Фоновая музыка</div>
-    <div style="font-size:.7rem;color:#b06090;">нажми для воспроизведения</div>
-  </div>
+  <div style="font-size:.9rem;font-weight:700;color:#6b1e3f;letter-spacing:.2em;">$ $ $</div>
+  <input type="range" min="0" max="1" step="0.01" value="1" oninput="audio.volume=this.value" style="width:70px;accent-color:#f472b6;cursor:none;"/>
   <button class="close-btn" onclick="document.getElementById('playerBox').style.display='none'">✕</button>
-  <iframe id="ytPlayer" width="0" height="0" style="display:none;" src="" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+
 </div>
 
 <script>
@@ -238,15 +236,16 @@ for(let i=0;i<50;i++){
 
 // MUSIC
 let playing=false;
+const audio = new Audio('https://files.catbox.moe/5dolvr.webm');
+audio.loop=true;
 function togglePlayer(){
-  const iframe=document.getElementById('ytPlayer');
   const btn=document.getElementById('playBtn');
   if(!playing){
-    iframe.src="https://www.youtube.com/embed/96AVj9ZySmY?autoplay=1&loop=1&playlist=96AVj9ZySmY&controls=0";
-    iframe.style.display='block';
+    audio.play();
     btn.textContent='⏸';playing=true;
   }else{
-    iframe.src='';btn.textContent='▶';playing=false;
+    audio.pause();
+    btn.textContent='▶';playing=false;
   }
 }
 </script>
