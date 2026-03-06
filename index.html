@@ -55,9 +55,7 @@ body{font-family:'Nunito',sans-serif;color:var(--text);overflow-x:hidden;backgro
 }
 
 /* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(255,240,246,.85);backdrop-filter:blur(16px);border-bottom:1px solid #fbb6ce;padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;}
-nav a{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--muted);text-decoration:none;letter-spacing:.05em;transition:color .3s;}
-nav a:hover{color:var(--coral);}
+nav{display:none;}
 
 /* HERO */
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem;position:relative;z-index:2;background:transparent;}
@@ -90,16 +88,16 @@ nav a:hover{color:var(--coral);}
 .flower-divider{text-align:center;font-size:1.4rem;margin-bottom:2rem;letter-spacing:.3rem;}
 
 /* WISHES */
-#wishes{background:rgba(255,245,249,.88);}
+#wishes{background:transparent;}
 .wishes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;}
 @media(max-width:480px){.wishes-grid{grid-template-columns:1fr 1fr;gap:.9rem;}}
-.wish-card{background:transparent;border-radius:20px;height:260px;perspective:1000px;cursor:pointer;}
-@media(max-width:480px){.wish-card{height:240px;}}
-.wish-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.wish-card{background:transparent;border-radius:20px;perspective:1000px;cursor:pointer;}
+@media(max-width:480px){.wish-card{}}
+.wish-card-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);}
 .wish-card.flipped .wish-card-inner{transform:rotateY(180deg);}
-.wish-front,.wish-back{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:1.4rem 1rem;text-align:center;overflow:hidden;}
-.wish-front{background:#fff;box-shadow:0 4px 20px rgba(244,114,182,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.wish-back{background:linear-gradient(135deg,#2d0a3e,#1a0a2e);box-shadow:0 4px 20px rgba(192,132,252,.2);transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;}
+.wish-front,.wish-back{border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:1.4rem 1rem 1.4rem;text-align:center;overflow:hidden;}
+.wish-front{background:rgba(255,240,250,0.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 8px 32px rgba(220,80,140,.22),0 2px 8px rgba(255,255,255,.4) inset;border:1.5px solid rgba(255,180,220,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.wish-back{position:absolute;inset:0;background:linear-gradient(135deg,#2d0a3e,#1a0a2e);box-shadow:0 4px 20px rgba(192,132,252,.2);transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:1.4rem 1rem;}
 .wish-back-title{font-family:'Great Vibes',cursive;font-size:1.5rem;background:linear-gradient(135deg,#f472b6,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .wish-back-text{font-size:.78rem;color:#d8b8f0;line-height:1.7;}
 .wish-back-icon{font-size:1.5rem;}
@@ -139,9 +137,9 @@ nav a:hover{color:var(--coral);}
 .wish-card:nth-child(15)::before{background:linear-gradient(90deg,#fb923c,#f43f5e);}
 .wish-card:nth-child(16)::before{background:linear-gradient(90deg,#c084fc,#fb923c);}
 .wish-card:nth-child(17)::before{background:linear-gradient(90deg,#f43f5e,#f59e0b);}
-.wish-emoji{font-size:1.9rem;margin-bottom:.5rem;display:block;}
-.wish-name{font-family:'Great Vibes',cursive;font-size:1.6rem;font-weight:400;margin-bottom:.4rem;background:linear-gradient(135deg,var(--coral),var(--lavender));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.wish-text{font-size:.82rem;color:var(--muted);line-height:1.7;}
+.wish-emoji{font-size:1.8rem;margin-bottom:.35rem;display:block;}
+.wish-name{font-family:'Great Vibes',cursive;font-size:1.65rem;font-weight:400;margin-bottom:.35rem;background:linear-gradient(135deg,#e8195a,#9333ea);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 3px rgba(220,80,140,.3));}
+.wish-text{font-size:.82rem;color:#4a0f2e;line-height:1.7;font-weight:600;text-shadow:0 1px 2px rgba(255,255,255,.6);word-break:break-word;}
 
 /* QUOTE */
 #quote{background:rgba(243,208,255,.5);padding:4rem 1.5rem;text-align:center;position:relative;z-index:2;}
@@ -204,8 +202,10 @@ input[type=range]{
 @media(max-width:480px){
   .player-body{min-width:160px;padding:.6rem .8rem;gap:.6rem;}
   input[type=range]{width:50px;}
-  .wishes-grid{grid-template-columns:1fr 1fr;}
-  .wish-text{font-size:.78rem;}
+  .wishes-grid{grid-template-columns:1fr;gap:1rem;}
+  .wish-text{font-size:.84rem;line-height:1.7;}
+  .wish-name{font-size:1.6rem;}
+  .wish-front{padding:1.2rem 1.1rem;}
 }
 </style>
 </head>
@@ -250,7 +250,7 @@ input[type=range]{
       <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">🌹</span><div class="wish-name">Мария</div><div class="wish-text">Спокойствие, внутренняя красота и доброжелательность создают вокруг тебя особую атмосферу. Пусть в твоей жизни будет больше улыбок, хорошего настроения и людей, которые тебя ценят.</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Мария</div><div class="wish-back-text">В ближайшие месяцы произойдёт приятное совпадение, которое поднимет настроение. К концу года появится повод гордиться собой.</div></div></div></div>
       <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">🌺</span><div class="wish-name">Маша</div><div class="wish-text">Лёгкость в общении, искренность и доброе отношение к людям делают тебя человеком, рядом с которым всегда приятно находиться. Пусть каждый день приносит больше радости и приятных моментов.</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Маша</div><div class="wish-back-text">В ближайшие месяцы произойдёт приятное совпадение, которое поднимет настроение. К концу года появится повод гордиться собой.</div></div></div></div>
       <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">💐</span><div class="wish-name">Ирина</div><div class="wish-text">Сильная, уверенная, прекрасная — всё это про тебя! Пусть этот праздник станет началом чего-то замечательного.</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Ирина</div><div class="wish-back-text">В этом году появится возможность проявить себя и показать свои сильные стороны. Это может заметить человек, от которого многое зависит.</div></div></div></div>
-      <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">🌷</span><div class="wish-name">Ульяна</div><div class="wish-text" style="font-size:.73rem;">Рядом с тобой всегда становится веселее. Пусть каждый день приносит хорошее настроение! Ты украшаешь нашу группу 🌷 И да, будем честны — парень у тебя тоже хорош<div style="position:absolute;bottom:6px;right:10px;font-size:1.1rem;transform:rotate(15deg);filter:drop-shadow(0 2px 4px rgba(244,114,182,.4));">😋</div></div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Ульяна</div><div class="wish-back-text">Лето обещает быть особенно насыщенным: больше встреч, прогулок и хороших воспоминаний. Один день может запомниться сильнее остальных.</div></div></div></div>
+      <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">🌷</span><div class="wish-name">Ульяна</div><div class="wish-text">Рядом с тобой всегда становится веселее. Пусть каждый день приносит хорошее настроение! Ты украшаешь нашу группу 🌷 И да, будем честны — парень у тебя тоже хорош 😋</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Ульяна</div><div class="wish-back-text">Лето обещает быть особенно насыщенным: больше встреч, прогулок и хороших воспоминаний. Один день может запомниться сильнее остальных.</div></div></div></div>
       <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">✨</span><div class="wish-name">Серафима</div><div class="wish-text">Твоё имя звучит как музыка, и ты сама такая же — особенная и неповторимая. С праздником, пусть всё сбывается!</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Серафима</div><div class="wish-back-text">Весной появится интересная идея или план. Если не откладывать его, к концу года можно увидеть очень хороший результат.</div></div></div></div>
       <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">👑</span><div class="wish-name">Виктория</div><div class="wish-text">Победа — в твоём имени, и победительница — в твоём характере. Пусть удача всегда будет на твоей стороне!</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Виктория</div><div class="wish-back-text">В этом году будет несколько маленьких побед, которые постепенно приведут к чему-то большему. Осень принесёт хорошие новости.</div></div></div></div>
       <div class="wish-card"><div class="wish-card-inner"><div class="wish-front"><span class="wish-emoji">🌻</span><div class="wish-name">Оля</div><div class="wish-text">Тёплая, искренняя, настоящая — именно такой ты и остаёшься. Желаем тебе радости и весеннего тепла!</div></div><div class="wish-back"><div class="wish-back-icon">🔮</div><div class="wish-back-title">Оля</div><div class="wish-back-text">Ближе к лету появится возможность провести больше времени с людьми, которые действительно важны. Это подарит много хороших воспоминаний.</div></div></div></div>
